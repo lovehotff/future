@@ -273,4 +273,45 @@
 
 # 并发paralleStream的使用
 
---todo
+- parallelStream的方法确实会使用多线程去运行，并且可以指定线程池，不过自定义线程必须是ForkJoinPool类型，否则会默认使ForkJoinPool.commonPool()的线程
+
+  ```java
+  public static void main(String[] args)  throws Exception{
+      List<Integer> demo = Stream.iterate(0, item -> item + 1)
+              .limit(5)
+              .collect(Collectors.toList());
+      //示例1
+      Stopwatch stopwatch = Stopwatch.createStarted(Ticker.systemTicker());
+      demo.stream().forEach(item -> {
+          try {
+              Thread.sleep(500);
+              System.out.println("示例1-"+Thread.currentThread().getName());
+          } catch (Exception e) { }
+      });
+      System.out.println("示例1-"+stopwatch.stop().elapsed(TimeUnit.MILLISECONDS));
+  
+      //示例2, 注意需要ForkJoinPool，parallelStream才会使用executor指定的线程，否则还是用默认的 ForkJoinPool.commonPool()
+      ExecutorService executor = new ForkJoinPool(10);
+      stopwatch.reset(); stopwatch.start();
+      CompletableFuture.runAsync(() -> demo.parallelStream().forEach(item -> {
+          try {
+              Thread.sleep(1000);
+              System.out.println("示例2-" + Thread.currentThread().getName());
+          } catch (Exception e) { }
+      }), executor).join();
+      System.out.println("示例2-"+stopwatch.stop().elapsed(TimeUnit.MILLISECONDS));
+      //示例３
+      stopwatch.reset(); stopwatch.start();
+      demo.parallelStream().forEach(item -> {
+          try {
+              Thread.sleep(1000);
+              System.out.println("示例3-"+Thread.currentThread().getName());
+          } catch (Exception e) { }
+      });
+      System.out.println("示例3-"+stopwatch.stop().elapsed(TimeUnit.MILLISECONDS));
+      executor.shutdown();
+  
+  }
+  ```
+
+  
