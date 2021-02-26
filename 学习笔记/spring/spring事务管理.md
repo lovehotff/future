@@ -417,8 +417,9 @@ public interface TransactionStatus{
 		         </property> 
 		     </bean> 
 		 </beans>
-	
-		
+
+
+​		
 		 (2)所有Bean共享一个代理基类
 		
 		 <?xml version="1.0" encoding="UTF-8"?>
@@ -521,11 +522,13 @@ public interface TransactionStatus{
 		         <property name="sessionFactory" ref="sessionFactory" />
 		     </bean>
 		 </beans>
-		
-		
+
+
+​		
 		 (4)使用tx标签配置的拦截器
-		
-		
+
+
+​		
 		 <?xml version="1.0" encoding="UTF-8"?>
 		 <beans xmlns="http://www.springframework.org/schema/beans"
 		     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -567,8 +570,9 @@ public interface TransactionStatus{
 		             pointcut-ref="interceptorPointCuts" />       
 		     </aop:config>     
 		 </beans>
-		
-		
+
+
+​		
 		(5)注解
 		
 		 /**
