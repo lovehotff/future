@@ -26,7 +26,7 @@ windowing_Clause：开窗子句，定义分析函数在操作行的集合，三�
   SELECT distinct a.managecom,count(*) over(partition by a.managecom order by a.managecom) FROM tmagentinfotozbx a;
   ```
 
-  ![image-20201231171346672](C:\Users\kgcaox\AppData\Roaming\Typora\typora-user-images\image-20201231171346672.png)
+  ![image-20201231171346672](oracle分析函数.assets/image-20201231171346672.png)
 
 * sum() over()  ：统计分区中记录的总和，partition by 可选，order by 可选
 
@@ -34,15 +34,13 @@ windowing_Clause：开窗子句，定义分析函数在操作行的集合，三�
   SELECT a.wageno,a.agentcode,sum(a.payment) over(partition by a.agentcode,a.wageno) FROM tmwagetotal a ;
   ```
 
-  ![image-20201231172346574](C:\Users\kgcaox\AppData\Roaming\Typora\typora-user-images\image-20201231172346574.png)
+  ![image-20201231172346574](oracle分析函数.assets/image-20201231172346574.png)
 
 * avg() over()  ：统计分区中记录的平均值，partition by 可选，order by 可选
 
   ```sql
   SELECT a.wageno,a.agentcode,avg(a.payment) over(partition by a.agentcode) FROM tmwagetotal a ;
   ```
-
-  
 
 * min() over() ：统计分区中记录的最小值，partition by 可选，order by 可选
 

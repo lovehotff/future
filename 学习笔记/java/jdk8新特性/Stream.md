@@ -26,62 +26,67 @@
 >>   ```
 
 >> * 映射转化 map
->>
+>
 >>   ```java
 >>   public class StreamTest {
->>   
->>       static class User{
->>           public User(Integer id){this.id = id; }
->>           Integer id; public Integer getId() {  return id; }
->>       }
->>   
->>       @Test
->>       public static void main(String[] args) {
->>           List<User> demo = Arrays.asList(new User(1), new User(2), new User(3));
->>           // User 转为 Integer(id)
->>           demo.stream().mapToInt(User::getId).forEach(System.out::println);
->>       }
->>   }
+>>             static class User{
+>>             public User(Integer id){this.id = id; }
+>>            Integer id; public Integer getId() {  return id; }
+>>        }
 >>   ```
+>
+>>         @Test
+>>          public static void main(String[] args) {
+>>              List<User> demo = Arrays.asList(new User(1), new User(2), new User(3));
+>>              // User 转为 Integer(id)
+>>              demo.stream().mapToInt(User::getId).forEach(System.out::println);
+>>          }
+>>          }
+>>
+>>         ```
+>>         
+>>         ```
+>
+
 
 >> * 数据处理 peek
->>
+>
 >>   ```java
 >>   public class StreamTest {
->>   
->>       static class User{
->>           public User(Integer id){this.id = id; }
->>           Integer id; public Integer getId() {  return id; }
->>       }
->>   
->>       @Test
->>       public static void main(String[] args) {
->>           List<User> demo = Arrays.asList(new User(1), new User(2), new User(3));
->>           // 无返回值
->>           demo.stream().peek(User::getId).forEachOrdered(System.out::println);
->>       }
->>   }
+>>       >       static class User{
+>>   >           public User(Integer id){this.id = id; }
+>>   >           Integer id; public Integer getId() {  return id; }
+>>   >       }
 >>   ```
-
->> * 映射撵平 flatMap
+>
+>>   >       @Test
+>>   >       public static void main(String[] args) {
+>>   >           List<User> demo = Arrays.asList(new User(1), new User(2), new User(3));
+>>   >           // 无返回值
+>>   >           demo.stream().peek(User::getId).forEachOrdered(System.out::println);
+>>   >       }
+>>   >       }
 >>
->>   ```java
->>   public class StreamTest {
->>   
->>       static class User{
->>           public User(Integer id){this.id = id; }
->>           Integer id; public Integer getId() {  return id; }
->>       }
->>   
->>       @Test
->>       public static void main(String[] args) {
->>           List<Stream<Integer>> demo = Arrays.asList(Stream.of(5), Stream.of(2), Stream.of(1));
->>           // User 转为 Integer(id)
->>           demo.stream().flatMap(Function.identity()).forEachOrdered(System.out::println);
->>       }
->>   }
 >>   ```
-
+>>   
+>>   ```
+>
+>>映射撵平 flatMap
+```
+>>   public class StreamTest {
+>>          static class User{
+>>              public User(Integer id){this.id = id; }
+>>              Integer id; public Integer getId() {  return id; }
+>>         }
+>>   
+>>          @Test
+>>          public static void main(String[] args) {
+>>              List<Stream<Integer>> demo = Arrays.asList(Stream.of(5), Stream.of(2), Stream.of(1));
+>>              // User 转为 Integer(id)
+>>              demo.stream().flatMap(Function.identity()).forEachOrdered(System.out::println);
+>>          }
+>>    }
+```
 >> * 去重 distinct
 
 >> * 排序 sorted
@@ -313,5 +318,7 @@
   
   }
   ```
+```
 
   
+```

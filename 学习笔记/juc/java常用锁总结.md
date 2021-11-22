@@ -149,7 +149,5 @@ public class ReadWriteLockTest {
 
 ​	--todo
 
-![image-20201116112345311](C:\Users\kgcaox\AppData\Roaming\Typora\typora-user-images\image-20201116112345311.png)
-
-​	
+![image-20201116112345311](java常用锁总结.assets/image-20201116112345311.png)
 

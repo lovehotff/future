@@ -10,7 +10,7 @@
 
 - 串行化，顾名思义是对于同一行记录，“写”会加“写锁”，“读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，才能继续执行。
 
-  ![image-20201028113731549](C:\Users\kgcaox\AppData\Roaming\Typora\typora-user-images\image-20201028113731549.png)
+  ![image-20201028113731549](../../../typora-user-images/image-20201028113731549.png)
 
 我们来看看在不同的隔离级别下，事务A会有哪些不同的返回结果，也就是图里面V1、V2、V3的返回值分别是什么。
 
@@ -36,7 +36,7 @@
 
    在执行更新操作时，会将每次更新操作都记录在回滚日志里，形成回滚段，如下图：
 
-   ![image-20201028115335624](C:\Users\kgcaox\AppData\Roaming\Typora\typora-user-images\image-20201028115335624.png)
+   ![image-20201028115335624](事务隔离.assets/image-20201028115335624.png)
 
 我们在不同时刻启动事务去查询时，会有不同的read_view，如图中看到的，在视图A、B、C里面，这一个记录的值分别是1、2、4，同一条记录在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）。
 
@@ -68,3 +68,5 @@ MySQL的事务启动方式有以下几种：
    select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))>60
    ```
 
+### 事务隔离还是不隔离的
+	* begin/start transaction 命令不是一个事务的起点，当执行第一个InnoDB表的语句执行时，事务才开始真正执行。如果你想要马上启动一个事务，可以使用start transaction with consistent snapshot 这个命令。
