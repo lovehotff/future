@@ -5,4 +5,4 @@
     * **getSystemResourceAsStream()方法**在java.lang包中可用
     * **getSystemResourceAsStream()方法**用于获取资源作为参数并将资源转换为InputStream，换句话说，可以说此方法用于表示InputStream来扫描给定资源。
     * **getSystemResourceAsStream()方法**是一个静态方法，可以使用类名进行访问，如果尝试使用类对象访问该方法，则不会出现任何错误。
-    * 从资源到InputStream对象的转换时， **getSystemResourceAsStream()方法**不会引发异常。
+    * 从资源到InputStream对象的转换时， **getSystemResourceAsStream()方法**不会引发异常。异常、日志、断言和调试

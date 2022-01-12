@@ -29,23 +29,18 @@
 >
 >>   ```java
 >>   public class StreamTest {
->>             static class User{
->>             public User(Integer id){this.id = id; }
->>            Integer id; public Integer getId() {  return id; }
->>        }
+>>            static class User{
+>>            public User(Integer id){this.id = id; }
+>>           Integer id; public Integer getId() {  return id; }
+>>       }
+>>       @Test
+>>    public static void main(String[] args) {
+>>        List<User> demo = Arrays.asList(new User(1), new User(2), new User(3));
+>>        // User 转为 Integer(id)
+>>        demo.stream().mapToInt(User::getId).forEach(System.out::println);
+>>    }
+>>    }
 >>   ```
->
->>         @Test
->>          public static void main(String[] args) {
->>              List<User> demo = Arrays.asList(new User(1), new User(2), new User(3));
->>              // User 转为 Integer(id)
->>              demo.stream().mapToInt(User::getId).forEach(System.out::println);
->>          }
->>          }
->>
->>         ```
->>         
->>         ```
 >
 
 
@@ -53,26 +48,22 @@
 >
 >>   ```java
 >>   public class StreamTest {
->>       >       static class User{
->>   >           public User(Integer id){this.id = id; }
->>   >           Integer id; public Integer getId() {  return id; }
->>   >       }
->>   ```
->
->>   >       @Test
->>   >       public static void main(String[] args) {
->>   >           List<User> demo = Arrays.asList(new User(1), new User(2), new User(3));
->>   >           // 无返回值
->>   >           demo.stream().peek(User::getId).forEachOrdered(System.out::println);
->>   >       }
->>   >       }
->>
->>   ```
->>   
+>>              static class User{
+>>              public User(Integer id){this.id = id; }
+>>              Integer id; public Integer getId() {  return id; }
+>>        }
+>>       @Test
+>>   public static void main(String[] args) {
+>>       List<User> demo = Arrays.asList(new User(1), new User(2), new User(3));
+>>       // 无返回值
+>>       demo.stream().peek(User::getId).forEachOrdered(System.out::println);
+>>   	}
+>>   }
 >>   ```
 >
 >>映射撵平 flatMap
-```
+>>
+>>```
 >>   public class StreamTest {
 >>          static class User{
 >>              public User(Integer id){this.id = id; }
@@ -86,7 +77,8 @@
 >>              demo.stream().flatMap(Function.identity()).forEachOrdered(System.out::println);
 >>          }
 >>    }
-```
+>>```
+
 >> * 去重 distinct
 
 >> * 排序 sorted

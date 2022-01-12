@@ -5979,8 +5979,6 @@ try {
 } finally {
     session.close();
 }
-
-
 ```
 
 　　同样，首先调用 SqlSessionFactory.openSession() 拿到一个 session，然后在 session 上执行各种 CRUD 操作。简单来说，SqlSession 就是 jdbc 连接的代表，openSession() 就是获取 jdbc 连接（当然其背后可能是从 jdbc 连接池获取）；session 中的各种 selectXXX 方法或者调用 mapper 的具体方法就是集合了 JDBC 调用的第 3、4、5、6 步。SqlSession 接口的定义如下：  
@@ -6060,8 +6058,6 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
     return environment.getTransactionFactory();
   }
 }
-
-
 ```
 
 我们来看下 transactionFactory.newTransaction 的实现，还是以 jdbc 事务为例子。
@@ -6075,8 +6071,6 @@ public class JdbcTransactionFactory implements TransactionFactory {
     return new JdbcTransaction(ds, level, autoCommit);
   }
 }
-
-
 ```
 
 newTransaction 的实现逻辑很简单，但是此时返回的事务不一定是有底层连接的。  
@@ -6100,13 +6094,10 @@ newTransaction 的实现逻辑很简单，但是此时返回的事务不一定�
     executor = (Executor) interceptorChain.pluginAll(executor);
     return executor;
   }
-
-
 ```
 
-　　如果没有配置执行器类型，默认是简单执行器。如果启用了缓存，则使用缓存执行器。  
-　　拿到执行器之后，new 一个 DefaultSqlSession 并返回，这样一个 SqlSession 就创建了，它从逻辑上代表一个封装了事务特性的连接，如果在此期间发生异常，则调用关闭事务（因为此时事务底层的连接可能已经持有了，否则会导致连接泄露）。  
-　　DefaultSqlSession 的构造很简单，就是简单的属性赋值：
+如果没有配置执行器类型，默认是简单执行器。如果启用了缓存，则使用缓存执行器。拿到执行器之后，new 一个 DefaultSqlSession 并返回，这样一个 SqlSession 就创建了，它从逻辑上代表一个封装了事务特性的连接，如果在此期间发生异常，则调用关闭事务（因为此时事务底层的连接可能已经持有了，否则会导致连接泄露）。 
+DefaultSqlSession 的构造很简单，就是简单的属性赋值：
 
 ```
 public class DefaultSqlSession implements SqlSession {
